@@ -12,6 +12,6 @@ Feature: Changing currency on the website
 
     Examples:
       | currency | currencySymbol |
-      | EUR      | €             |
-      | GBP      | £             |
-      | USD      | $             |
+      | EUR      | €              |
+      | GBP      | £              |
+      | USD      | $              |

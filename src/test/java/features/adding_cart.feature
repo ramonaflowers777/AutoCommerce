@@ -18,6 +18,6 @@ Feature: Managing cart items
 
     Examples:
       | id | quantity |
-      | 43 |      0   |
-      | 40 |      5   |
+      | 43 | 0        |
+      | 40 | 5        |
 

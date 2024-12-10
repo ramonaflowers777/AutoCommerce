@@ -1,4 +1,10 @@
 [
-  {"name" :  "MacBook" , "price" :  500.00},
-  {"name" : "iPhone" , "price" : 101.00}
+  {
+    "name": "MacBook",
+    "price": 500.00
+  },
+  {
+    "name": "iPhone",
+    "price": 101.00
+  }
 ]

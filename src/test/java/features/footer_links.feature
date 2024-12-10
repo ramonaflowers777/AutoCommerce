@@ -9,6 +9,6 @@ Feature: Footer links accessibility
     Then Page should contain "<footerElement>" displayed
 
     Examples:
-    |footerElement|
-    | About Us |
-    | Contact Us |
+      | footerElement |
+      | About Us      |
+      | Contact Us    |
