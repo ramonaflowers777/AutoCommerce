@@ -5,15 +5,10 @@ import aquality.selenium.elements.ElementType;
 import aquality.selenium.elements.interfaces.*;
 import aquality.selenium.forms.Form;
 import constants.LocatorConstants;
-import io.cucumber.java.eo.Do;
-import io.cucumber.java.sl.In;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Wait;
-
-import java.time.Duration;
 
 public class MainPage extends Form {
     private final ILink dropDown = getElementFactory().getLink(By.xpath("//ul[@class='list-inline']//li[@class='dropdown']"), "Drop down menu");
@@ -27,7 +22,6 @@ public class MainPage extends Form {
     private final IButton cartButton = getElementFactory().getButton(By.id("cart"), "Cart");
     private final ILink viewCartLink = getElementFactory().getLink(By.xpath("//div[@id='cart']//a[contains(@href,'checkout/cart')]"), "Viewing cart");
     private final ILink aboutUsLink = getElementFactory().getLink(By.xpath("//footer//a[contains(text(),'About us')]"),"Footer About us  Link");
-    private final ITextBox quantityInput = getElementFactory().getTextBox(By.xpath("//input[contains(@name, 'quantity[')]"), "Quantity input");
 
 
     public MainPage() {
@@ -95,23 +89,5 @@ public class MainPage extends Form {
         footerLink.click();
     }
 
-    public void changingQuantityOfItem(String quantity) {
-        quantityInput.clearAndType(quantity + Keys.ENTER);
-    }
 
-    public boolean isTotalPriceCorrect(String quantity) {
-        String unitpriceText =  getElementFactory().getLabel(By.xpath("//tbody//td[@class='text-right'][1]"), "Unit price").getText();
-        String unitPriceNumericPart = unitpriceText.replaceAll("[^0-9.]", ""); // removes everything except digits and decimal points
-
-        String totalPriceText =  getElementFactory().getLabel(By.xpath("//tbody//td[@class='text-right'][2]"), "total price").getText();
-        String totalPriceNumericPart = totalPriceText.replaceAll("[^0-9.]", "");
-
-        double unitPrice = Double.parseDouble(unitPriceNumericPart);
-        double totalPrice = Double.parseDouble(totalPriceNumericPart);
-
-        int quantityInteger = Integer.parseInt(quantity);
-
-        double totalPriceTimes = unitPrice * quantityInteger;
-        return totalPrice == totalPriceTimes;
-    }
 }

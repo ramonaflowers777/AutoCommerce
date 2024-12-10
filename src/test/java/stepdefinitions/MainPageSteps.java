@@ -80,14 +80,4 @@ public class MainPageSteps {
             boolean isDisplayed = AqualityServices.getBrowser().getDriver().findElement(By.xpath(headerXpath)).isDisplayed();
             Assert.assertTrue(isDisplayed, "Page is not correctly displayed");
     }
-
-    @When("I change quantity by {string} and submit")
-    public void changingQuantity(String quantity) {
-        mainPage.changingQuantityOfItem(quantity);
-    }
-
-    @Then("Total price is price times {string}")
-    public void isTotalPriceCorrect(String quantity) {
-        Assert.assertTrue(mainPage.isTotalPriceCorrect(quantity));
-    }
 }

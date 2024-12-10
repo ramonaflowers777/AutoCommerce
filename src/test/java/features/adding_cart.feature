@@ -1,25 +1,23 @@
-Feature: Adding items to Cart and verify total
+Feature: Managing cart items
+
   I am a user
-  I want to add products to Cart
-  So that I can purchase them and see the correct total
-
-Scenario Outline: Adding items to the cart and verifying the total price
-  Given I am on the Main Page
-  When I add product with "<id>" in cart
-  Then Success Message with product "<id>" is shown
-  When I open the cart
-  Then The Shopping cart page should be open
-  And Product with "<id>" is in the cart
-  When I change quantity by "<quantity>" and submit
-  Then Total price is price times "<quantity>"
-#  And Price is shown correctly
+  I want to add products to Cart and change quantity
+  So that I can purchase them
 
 
-  Examples:
-  | id | quantity |
-  | 43 |      2   |
-  | 40 |      3   |
+  Scenario Outline: Adding items to cart and changing quantity
+    Given I am on the Main Page
+    When I add product with "<id>" in cart
+    Then Success Message with product "<id>" is shown
+    When I open the cart
+    Then The Shopping cart page should be open
+    And Product with "<id>" is in the cart
+    When I change quantity by "<quantity>" and submit
+    Then The product with "<id>" should be removed from the cart if the "<quantity>" is 0
+    And The total price should be price times "<quantity>" if the quantity is greater than 0
 
-
-#  Then The product with "<id>" should not be in the cart
+    Examples:
+      | id | quantity |
+      | 43 |      0   |
+      | 40 |      5   |
 
