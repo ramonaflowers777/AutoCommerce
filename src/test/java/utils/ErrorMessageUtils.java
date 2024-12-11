@@ -14,13 +14,13 @@ public class ErrorMessageUtils {
     public static List<String> errorMessagesList() throws IOException {
         Gson gson = new Gson();
 
-        try(FileReader fileReader = new FileReader(filePath)) {
+        try (FileReader fileReader = new FileReader(filePath)) {
             JsonObject jsonObject = gson.fromJson(fileReader, JsonObject.class);
-           List<String> errorMessages = new ArrayList<>();
-           jsonObject.getAsJsonArray("errorMessages").forEach(jsonElement ->
-                   errorMessages.add(jsonElement.getAsString())
-           );
-           return errorMessages;
+            List<String> errorMessages = new ArrayList<>();
+            jsonObject.getAsJsonArray("errorMessages").forEach(jsonElement ->
+                    errorMessages.add(jsonElement.getAsString())
+            );
+            return errorMessages;
         }
     }
 }

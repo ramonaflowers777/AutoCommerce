@@ -14,7 +14,7 @@ Feature: User Authentication
     Then I should see "<expectedResult>"
 
     Examples:
-    | email | password | expectedResult |
-    | test@test.ge | test123 | My account page |
-    | user@user.ge| user123 | Error message    |
+      | email        | password | expectedResult  |
+      | test@test.ge | test123  | My account page |
+      | user@user.ge | user123  | Error message   |
 

@@ -1,6 +1,5 @@
 package stepdefinitions;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
@@ -37,8 +36,7 @@ public class LogInSteps {
     public void myAccPageisShown(String expectedResult) throws IOException {
         if (expectedResult.equalsIgnoreCase("My account page")) {
             Assert.assertTrue(logIn.successLogin(), "My Account page is not displayed");
-        }
-        else if (expectedResult.equalsIgnoreCase("Error message")) {
+        } else if (expectedResult.equalsIgnoreCase("Error message")) {
             Assert.assertTrue(logIn.isErrorMessageDisplayed(), "Error message was not displayed");
             String actualMessage = logIn.getErrorMessage();
             List<String> possibleMessages = ErrorMessageUtils.errorMessagesList();
