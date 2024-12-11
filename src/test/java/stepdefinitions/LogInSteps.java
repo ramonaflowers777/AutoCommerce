@@ -6,41 +6,43 @@ import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 import pages.LogIn;
+import utils.ErrorMessageUtils;
+
+import java.io.IOException;
+import java.util.List;
 
 public class LogInSteps {
-    private static final String errMsg = "Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.";
     private final LogIn logIn = new LogIn();
 
-    @When("I Enter email for email")
-    @Step("Entering email")
-    public void iEnterEmail() {
-        logIn.enterEmail(System.getenv("USER_EMAIL"));
+    @When("I Enter {string} for email")
+    @Step("Entering email: {0}")
+    public void enteringValidEmail(String email) {
+        logIn.enterEmail(email);
     }
 
-    @When("I Enter password for password")
-    @Step("Entering password")
-    public void iEnterPassword() {
-        logIn.enterPassword(System.getenv("USER_PASS"));
+    @When("I Enter {string} for password")
+    @Step("Entering password: {0}")
+    public void enteringInvalidPassword(String password) {
+        logIn.enterPassword(password);
     }
 
-    @And("I Click Log in button")
+    @When("I Click Log in button")
     @Step("Logging in")
     public void IClickInLogInButton() {
         logIn.logIn();
     }
 
-    @Then("My account Page is shown")
-    @Step("My account page is displayed")
-    public void myAccPageisShown() {
-        Assert.assertTrue(logIn.successLogin(), "My Account page is not displayed");
-    }
-
-    //error message sheidzleba sxvac iyos da gasasworebeli maq
-    @Then("I Should see an error message")
-    @Step("Error message is displayed")
-    public void isErrorMessageShown() {
-        Assert.assertTrue(logIn.isErrorMessageDisplayed(), "Error message was not displayed");
-        String actualMessage = logIn.getErrorMessage();
-        Assert.assertTrue(actualMessage.contains(errMsg), "Expected message and error messages are not matching");
+    @Then("I should see {string}")
+    @Step("Verifiying result : {0} ")
+    public void myAccPageisShown(String expectedResult) throws IOException {
+        if (expectedResult.equalsIgnoreCase("My account page")) {
+            Assert.assertTrue(logIn.successLogin(), "My Account page is not displayed");
+        }
+        else if (expectedResult.equalsIgnoreCase("Error message")) {
+            Assert.assertTrue(logIn.isErrorMessageDisplayed(), "Error message was not displayed");
+            String actualMessage = logIn.getErrorMessage();
+            List<String> possibleMessages = ErrorMessageUtils.errorMessagesList();
+            Assert.assertTrue(possibleMessages.contains(actualMessage), "Expected message and error messages are not matching");
+        }
     }
 }

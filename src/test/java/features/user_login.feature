@@ -7,16 +7,14 @@ Feature: User Authentication
     Given I am on the Main Page
     When I Click on My account and choose Log in
 
-  Scenario: Logging in with correct credentials
-    And I Enter email for email
-    And I Enter password for password
+  Scenario Outline: Logging in with correct credentials
+    When I Enter "<email>" for email
+    And I Enter "<password>" for password
     And I Click Log in button
-    Then My account Page is shown
+    Then I should see "<expectedResult>"
 
-#  Scenario: Logging in with incorrect credentials
-#    And I Enter "user@user.ge" for email
-#    And I Enter "user1" for password
-#    And I Click Log in button
-#    Then I Should see an error message
-
+    Examples:
+    | email | password | expectedResult |
+    | test@test.ge | test123 | My account page |
+    | user@user.ge| user123 | Error message    |
 
